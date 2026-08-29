@@ -23,7 +23,7 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-const siteUrl = "https://birajkarki.dev"; // TODO(biraj): confirm production domain
+const siteUrl = "https://birajkarki.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

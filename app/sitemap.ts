@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://birajkarki.dev"; // TODO(biraj): confirm production domain
+const siteUrl = "https://birajkarki.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

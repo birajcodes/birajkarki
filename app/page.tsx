@@ -5,6 +5,7 @@ import Experience from "@/components/sections/Experience";
 import Work from "@/components/sections/Work";
 import Lab from "@/components/sections/Lab";
 import Building from "@/components/sections/Building";
+import System from "@/components/sections/System";
 import BeyondCode from "@/components/sections/BeyondCode";
 import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
@@ -20,6 +21,7 @@ export default function Home() {
         <Work />
         <Lab />
         <Building />
+        <System />
         <BeyondCode />
         <Skills />
         <Contact />
