@@ -14,6 +14,12 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
+# The repo currently ships no static assets (favicon/icon/OG image are all
+# generated dynamically via app/ file conventions), so public/ may not exist
+# in the build context. Guarantee it exists so the runner stage's COPY below
+# never fails, while still picking up real assets whenever they're added.
+RUN mkdir -p public
+
 # ---- runner: minimal runtime image, non-root ----
 FROM node:22-alpine AS runner
 WORKDIR /app
