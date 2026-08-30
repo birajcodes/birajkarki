@@ -18,8 +18,8 @@ export default function Lab() {
         description="Areas I'm exploring — not a claim to be a researcher."
       />
 
-      <div className="grid gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
-        <div>
+      <div className="grid min-w-0 gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
+        <div className="min-w-0">
           <span className="font-mono text-[10px] tracking-[0.2em] text-accent">
             {quantum.headline.toUpperCase()} — {quantum.status.toUpperCase()}
           </span>
@@ -42,7 +42,7 @@ export default function Lab() {
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <span className="font-mono text-[10px] tracking-[0.2em] text-fg-dim">
             WHAT I&apos;M EXPLORING
           </span>
