@@ -1,12 +1,9 @@
-// TODO(biraj): Velox Labs and Technergy Global still need exact employment
-// dates/locations. R.D. International also still needs dates (flagged as
-// TODO by biraj — not fabricated) plus any measurable results, team size,
-// and tools used (e.g. Canva, Adobe, Meta Ads Manager). Arba Solutions
-// needs its remaining ~3 skills and 1-2 more bullet specifics. Until those
-// are supplied, ordering of Velox Labs / Technergy Global relative to
-// R.D. International is a best guess (most-recent-first); the three most
-// recently confirmed roles (R.D. International, Arba Solutions, Cybertron
-// Nepal) are in the exact order and with the exact dates/locations given.
+// TODO(biraj): R.D. International still needs measurable results, team
+// size, and tools used (e.g. Canva, Adobe, Meta Ads Manager). Arba
+// Solutions needs its remaining ~3 skills and 1-2 more bullet specifics.
+// Velox Labs, Technergy Global, and R.D. International are in the exact
+// order biraj specified; Arba Solutions and Cybertron Nepal (not part of
+// that instruction) are kept after them, in their prior relative order.
 
 export type ExperienceEntry = {
   id: string;
@@ -22,33 +19,31 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     id: "velox-labs",
-    company: "Velox Labs",
-    role: "Mid-Level Frontend Developer",
-    period: "TODO — dates not supplied",
-    location: "TODO — location not supplied",
+    company: "Velox Labs Pvt. Ltd.",
+    role: "Mid-Level Frontend Developer / Full Stack Developer",
+    period: "Nov 2022 - Jun 2025 · 2 yrs 8 mos",
+    location: "Kathmandu, Bāgmatī, Nepal · On-site",
     summary:
-      "Built Hajir, an HRMS dashboard that went on to be adopted by 500+ companies, and the biometric layer that feeds it real attendance data.",
+      "Built and scaled Hajir, an HRMS dashboard adopted by 500+ client companies, along with its biometric integration layer and internal tooling.",
     impact: [
-      "Built the Hajir Software HRMS dashboard, later adopted by 500+ companies.",
-      "Built the biometric integration connecting hardware devices to the HRMS.",
-      "Authored a custom JavaScript NPM package used across internal projects.",
-      "Designed Go-based internal tooling for the team.",
-      "Worked on performance and monitoring improvements across the platform.",
+      "Built Hajir Software (HRMS) dashboard, adopted by 500+ client companies.",
+      "Developed biometric integration system and custom NPM package for biometric hardware.",
+      "Designed a Go-based internal monitoring tool, improving monitoring efficiency by 20%.",
     ],
     stack: ["Next.js", "TypeScript", "Go", "Node.js"],
   },
   {
     id: "technergy-global",
-    company: "Technergy Global",
-    role: "Lead Software Developer",
-    period: "TODO — dates not supplied",
-    location: "TODO — location not supplied",
+    company: "Technergy Global Pvt. Ltd.",
+    role: "Lead Software Engineer",
+    period: "Jan 2024 - Sep 2025 · 1 yr 9 mos",
+    location: "Kathmandu, Nepal",
     summary:
       "Led development on multiple client platforms end to end — architecture, delivery pipeline, and the developers building it.",
     impact: [
-      "Architected 3+ client platforms.",
-      "Optimized Docker CI/CD pipelines.",
-      "Mentored developers on the team.",
+      "Architected 3+ client platforms with 100% on-time delivery.",
+      "Optimized CI/CD pipelines with Docker, reducing deployment time by 40%.",
+      "Mentored 5 developers, improving team productivity by 15%.",
     ],
     stack: ["Next.js", "Node.js", "Docker", "GitHub Actions"],
   },
@@ -56,9 +51,8 @@ export const experience: ExperienceEntry[] = [
     id: "rd-international",
     company: "R.D. International Educational Consultancy",
     role: "Technical Lead",
-    // TODO(biraj): dates not yet decided — do not fill in without confirming.
-    period: "TODO — dates not supplied",
-    location: "TODO — location not supplied",
+    period: "Apr 2024 - Aug 2025 · 1 yr 5 mos",
+    location: "Koteshwor, Kathmandu, Nepal · Full-time",
     summary:
       "Managed the entire IT function end to end, spanning technical infrastructure and marketing/creative operations.",
     impact: [

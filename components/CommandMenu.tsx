@@ -11,7 +11,7 @@ import {
   FlaskConical,
   History,
 } from "lucide-react";
-import { GithubMark, LinkedinMark } from "@/components/icons";
+import { GithubMark, LinkedinMark, MediumMark } from "@/components/icons";
 import { site } from "@/data/site";
 
 const NAV_ITEMS = [
@@ -44,6 +44,14 @@ export default function CommandMenu() {
   const external = useCallback((href: string) => {
     setOpen(false);
     window.open(href, "_blank", "noopener,noreferrer");
+  }, []);
+
+  const download = useCallback((href: string, filename: string) => {
+    setOpen(false);
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = filename;
+    link.click();
   }, []);
 
   return (
@@ -109,11 +117,18 @@ export default function CommandMenu() {
                   LinkedIn
                 </Command.Item>
                 <Command.Item
-                  onSelect={() => external(site.links.resume)}
+                  onSelect={() => external(site.links.medium)}
+                  className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-sm text-fg data-[selected=true]:bg-accent-dim data-[selected=true]:text-accent-fg"
+                >
+                  <MediumMark size={14} className="text-fg-dim" />
+                  Medium
+                </Command.Item>
+                <Command.Item
+                  onSelect={() => download(site.links.resume, "Biraj-Karki-Resume.pdf")}
                   className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-sm text-fg data-[selected=true]:bg-accent-dim data-[selected=true]:text-accent-fg"
                 >
                   <FileText size={14} className="text-fg-dim" />
-                  Resume
+                  Download Resume
                 </Command.Item>
               </Command.Group>
             </Command.List>

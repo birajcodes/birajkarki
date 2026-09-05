@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import { site } from "@/data/site";
 import CustomCursor from "@/components/CustomCursor";
 import CommandMenu from "@/components/CommandMenu";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -70,9 +71,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <CustomCursor />
-        <CommandMenu />
-        {children}
+        <MotionProvider>
+          <CustomCursor />
+          <CommandMenu />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

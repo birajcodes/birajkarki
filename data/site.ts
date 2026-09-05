@@ -8,6 +8,7 @@ export const site = {
   tagline: "I build software, explore systems, and turn complex ideas into things people can use.",
   location: "TODO — not specified in source material", // TODO(biraj)
   email: "birajkarki9849@gmail.com",
+  phone: "605-202-0350",
   availability: [
     "SOFTWARE ENGINEERING",
     "PRODUCT",
@@ -15,9 +16,12 @@ export const site = {
     "COLLABORATION",
   ],
   links: {
-    github: "#", // TODO(biraj): add GitHub profile URL
-    linkedin: "#", // TODO(biraj): add LinkedIn profile URL
-    resume: "#", // TODO(biraj): add /resume.pdf to /public and point here
+    github: "https://github.com/birajcodes",
+    // Legacy account, kept as a secondary link (see Contact footer).
+    githubLegacy: "https://github.com/birajkarki",
+    linkedin: "https://www.linkedin.com/in/biraj-karki/",
+    medium: "https://medium.com/@birajkarki",
+    resume: "/resume.pdf",
   },
   identity: {
     statement: "I like building things that make complicated systems feel simple.",

@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "motion/react";
+
 type SectionHeadingProps = {
   index: string;
   title: string;
@@ -10,7 +14,13 @@ export default function SectionHeading({
   description,
 }: SectionHeadingProps) {
   return (
-    <div className="mb-12 flex items-end justify-between gap-6 md:mb-16">
+    <motion.div
+      className="mb-12 flex items-end justify-between gap-6 md:mb-16"
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="flex items-baseline gap-4">
         <span className="font-mono text-xs tracking-[0.2em] text-accent">
           {index}
@@ -24,6 +34,6 @@ export default function SectionHeading({
           {description}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 }

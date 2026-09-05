@@ -1,0 +1,84 @@
+name: Deploy
+
+# Runs only after the CI workflow completes successfully on main —
+# deployment never happens off an unverified commit.
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  
+  build-and-push:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.image.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Set image tag
+        id: image
+        run: |
+          IMAGE="ghcr.io/${{ github.repository_owner }}/biraj-portfolio:${{ github.event.workflow_run.head_sha }}"
+          echo "tag=$IMAGE" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          build-args: |
+            GIT_COMMIT_SHA=${{ github.event.workflow_run.head_sha }}
+            BUILD_TIME=${{ github.event.workflow_run.updated_at }}
+          tags: |
+            ${{ steps.image.outputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/biraj-portfolio:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Copy deploy script to droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_SSH_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          source: "deploy/deploy.sh"
+          target: "/home/${{ secrets.DROPLET_SSH_USER }}/biraj-portfolio-deploy"
+          strip_components: 1
+
+      - name: Deploy on droplet
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_SSH_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            set -e
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+            chmod +x /home/${{ secrets.DROPLET_SSH_USER }}/biraj-portfolio-deploy/deploy.sh
+            /home/${{ secrets.DROPLET_SSH_USER }}/biraj-portfolio-deploy/deploy.sh "${{ needs.build-and-push.outputs.image }}"

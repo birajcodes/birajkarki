@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
+import { motion } from "motion/react";
 import { site } from "@/data/site";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
@@ -97,16 +98,19 @@ export default function Hero() {
               BUILDING SOFTWARE. EXPLORING WHAT&apos;S NEXT.
             </p>
 
-            <button
+            <motion.button
               data-cursor="hover"
               onClick={() =>
                 document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
               }
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="group mt-10 inline-flex items-center gap-3 border border-border-strong px-5 py-3 font-mono text-[11px] tracking-[0.15em] text-fg transition-colors hover:border-accent hover:text-accent"
             >
               [ EXPLORE SYSTEM ]
               <span className="transition-transform group-hover:translate-y-0.5">↓</span>
-            </button>
+            </motion.button>
           </div>
 
           <div className="flex flex-col gap-3 font-mono text-[10px] tracking-[0.15em] text-fg-dim sm:flex-row sm:items-end sm:justify-between">

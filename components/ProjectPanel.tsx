@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import type { Project } from "@/data/projects";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function ProjectPanel({
   project,
@@ -17,11 +20,16 @@ export default function ProjectPanel({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <button
+    <motion.button
       data-cursor="project"
       onClick={onOpen}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ duration: 0.5, ease: EASE }}
       className="group relative w-full overflow-hidden border-t border-border py-10 text-left transition-colors last:border-b hover:bg-bg-elevated/40 md:py-14"
     >
       <div className="flex flex-col gap-6 px-1 md:flex-row md:items-center md:justify-between md:gap-10">
@@ -71,6 +79,6 @@ export default function ProjectPanel({
           </span>
         </div>
       </div>
-    </button>
+    </motion.button>
   );
 }

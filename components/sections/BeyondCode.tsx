@@ -1,10 +1,20 @@
+"use client";
+
 import { Users } from "lucide-react";
+import { motion } from "motion/react";
 import { leadership } from "@/data/experience";
 
 export default function BeyondCode() {
   return (
     <section id="beyond" className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-      <div className="flex flex-col gap-8 border border-border bg-bg-elevated/30 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12">
+      <motion.div
+        className="flex flex-col gap-8 border border-border bg-bg-elevated/30 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="flex items-start gap-5">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border-strong text-accent">
             <Users size={16} />
@@ -45,7 +55,7 @@ export default function BeyondCode() {
         <div className="shrink-0 self-start rounded-full border border-accent/40 bg-accent-dim px-4 py-2 font-mono text-[11px] tracking-[0.1em] text-accent sm:self-center">
           50+ MEMBERS
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

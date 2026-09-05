@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { experience, leadership } from "@/data/experience";
+import { experience } from "@/data/experience";
 import SectionHeading from "@/components/SectionHeading";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function Experience() {
   const [active, setActive] = useState(0);
@@ -23,7 +25,14 @@ export default function Experience() {
       <div className="grid gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-16">
         <ol className="relative border-l border-border pl-6">
           {experience.map((entry, i) => (
-            <li key={entry.id} className="relative mb-2 last:mb-0">
+            <motion.li
+              key={entry.id}
+              className="relative mb-2 last:mb-0"
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, ease: EASE, delay: i * 0.06 }}
+            >
               <span
                 className={`absolute top-3 -left-[27px] h-2.5 w-2.5 rounded-full border transition-colors ${
                   active === i
@@ -32,10 +41,13 @@ export default function Experience() {
                 }`}
                 aria-hidden="true"
               />
-              <button
+              <motion.button
                 data-cursor="hover"
                 onClick={() => setActive(i)}
                 aria-pressed={active === i}
+                whileHover={{ x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: EASE }}
                 className="w-full py-3 text-left"
               >
                 <div className="font-mono text-[10px] tracking-[0.15em] text-fg-dim">
@@ -49,8 +61,8 @@ export default function Experience() {
                   {entry.company}
                 </div>
                 <div className="mt-0.5 text-sm text-fg-muted">{entry.role}</div>
-              </button>
-            </li>
+              </motion.button>
+            </motion.li>
           ))}
         </ol>
 
@@ -97,17 +109,6 @@ export default function Experience() {
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="mt-16 flex flex-col gap-4 border-t border-border pt-10 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <span className="font-mono text-[10px] tracking-[0.15em] text-accent">
-            BEYOND THE ROLE
-          </span>
-          <p className="mt-2 max-w-lg text-fg-muted">
-            {leadership.role}, {leadership.organization} — {leadership.summary}
-          </p>
         </div>
       </div>
     </section>
