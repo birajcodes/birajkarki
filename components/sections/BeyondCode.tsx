@@ -16,6 +16,9 @@ export default function BeyondCode() {
             <h3 className="mt-2 font-display text-2xl text-fg sm:text-3xl">
               {leadership.role}, {leadership.organization}
             </h3>
+            <div className="mt-1 font-mono text-[10px] tracking-[0.15em] text-fg-dim">
+              {leadership.period} · {leadership.location}
+            </div>
             <ul className="mt-4 flex flex-col gap-2">
               {leadership.points.map((point) => (
                 <li key={point} className="flex gap-3 text-sm text-fg-muted">
@@ -24,6 +27,18 @@ export default function BeyondCode() {
                 </li>
               ))}
             </ul>
+            {leadership.skills.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {leadership.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-border px-3 py-1 font-mono text-[10px] tracking-[0.1em] text-fg-muted"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
